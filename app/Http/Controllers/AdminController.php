@@ -39,7 +39,6 @@ class AdminController extends Controller
             return redirect()->route('usertool')->with('error', 'User not found');
         }
 
-        // Assuming you have a roles model or you can get roles in some way
         $roles = Role::all();
 
         return view('admin.manageRoles', compact('user', 'roles'));
