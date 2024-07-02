@@ -41,7 +41,7 @@ class AdminController extends Controller
 
         $roles = Role::all();
 
-        return view('admin.manageRoles', compact('user', 'roles'));
+        return view('admin.manageRoles')->with(compact('user', 'roles')) ;
     }
 
     public function updateRole(Request $request, $id){

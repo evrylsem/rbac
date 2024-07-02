@@ -24,9 +24,10 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/admin', [AdminController::class, 'index'])->name('dash')->middleware('role:admin');
     Route::get('/admin/users',[AdminController::class,'manageUsers'])->name('usertool')->middleware('role:admin');
-    Route::get('/admin/user/editrole/{id}', [AdminController::class, 'editRoles'])->name('userroles')->middleware('role:admin');
-    Route::post('/admin/user/update-roles/{id}', [AdminController::class, 'updateRole'])->name('userroleupdate')->middleware('role:admin');
-    Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('userdelete')->middleware('role:admin');
+
+    Route::get('/admin/user/{id}/edit-role', [AdminController::class, 'editRoles'])->middleware('role:admin')->name('userroles');
+    Route::post('/admin/user/{id}/update-role', [AdminController::class, 'updateRole'])->middleware('role:admin')->name('userroleupdate');
+    Route::delete('/admin/user/{id}/delete', [AdminController::class, 'deleteUser'])->middleware('role:admin')->name('userdelete');
     
 
 

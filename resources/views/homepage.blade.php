@@ -4,20 +4,20 @@
 
 @section('page-content')
 <div class="container-fluid">
-    <h1>Welcome to the Site</h1>
+    <h1 class="mt-4">Welcome to the Site</h1>
     <br>
-    <a href="{{ route('acctg') }}"
+    <a href="{{ route('acctg') }}" style="font-size: 1.5rem; margin: 1.5rem;"
         @unless(Auth::user()->hasRole('admin') || Auth::user()->hasRole('bookeeper') || Auth::user()->hasRole('auditor') || Auth::user()->hasRole('audasst'))
             class="link-dark not-allowed" style={!! '"pointer-events: none; cursor: not-allowed;"' !!}
         @endunless
-    >Accounting</a>
-    <a href="{{ route('prod') }}"
+        >Accounting</a>
+    <a href="{{ route('prod') }}" style="font-size: 1.5rem; margin: 1.5rem;"
         @unless(Auth::user()->hasRole('admin') || Auth::user()->hasRole('assembler'))
             class="link-dark not-allowed" style={!! '"pointer-events: none; cursor: not-allowed;"' !!}
         @endunless
     >Production</a>
     @if(Auth::user()->hasRole('admin'))
-       <a href="{{ route('dash') }}" >Dashboard</a>
+       <a href="{{ route('dash') }}" style="font-size: 1.5rem; margin: 1.5rem;">Dashboard</a>
     @endif
 </div>
 @endsection
