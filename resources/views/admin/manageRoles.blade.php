@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col" style="font-size: 2rem; font-weight:bold;">
-            <a href="{{ route('usertool') }}" class="m-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(129, 0, 0, 1);transform: ;msFilter:;">
+            <a href="{{ route('usertool') }}" class="m-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(129, 0, 0, 1)">
                     <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path>
                 </svg></a>
             Manage Role for <span style="font-size: 2rem; font-weight:bold; color:#810000; text-decoration: underline;">{{ $user->userInfo->user_firstname.' '.$user->userInfo->user_lastname }}</span>.
