@@ -34,14 +34,14 @@
 <body>
     <div class="container-fluid">
         <div class="row m-2 align-items-center">
+        @if(Auth::check())
             <div class="col text-start">
                 <a href="#" class="link-underline link-underline-opacity-0" style="color:black">
-                    <img src="..\images\laravel-logo.png" alt="Logo" style="height: 3rem;">
+                    <img src="{{asset('images/laravel-logo.png')}}" alt="Logo" style="height: 3rem;">
                 </a>
             </div>
             <div class="col text-end">
                 <div class="fs-6 dropdown">
-                    @if(Auth::check())
                        {{ Auth::user()->userInfo->user_firstname.' '.Auth::user()->userInfo->user_lastname }}
                     <span class="fs-8 mr-2" style="font-weight: bold;">
                         @if(Auth::user()->hasRole('admin'))
@@ -61,9 +61,10 @@
                         <li>@include('slugs.logout')</li>
                     </ul>
                        
-                    @endif
-                 </div>
+                    
+                </div>
             </div>
+            @endif
         </div>
         <div class="container-fluid ">
             @if(!Auth::check())

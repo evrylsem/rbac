@@ -34,22 +34,40 @@ class AdminController extends Controller
     }
 
     public function editRoles($id){
-        $user = User::find($id);
-        if (!$user) {
-            return redirect()->route('usertool')->with('error', 'User not found');
-        }
-
         $roles = Role::all();
+        $permissions = $roles->flatMap->permissions;
+        $user = User::findOrFail($id);
 
-        return view('admin.manageRoles')->with(compact('user', 'roles')) ;
+        session(['pwChangeEnabled'=>'disabled']);
+
+        return view('admin.manageRoles')->with(compact('user', 'roles', 'permissions')) ;
     }
 
     public function updateRole(Request $request, $id){
-        $user = User::find($id);
-        if (!$user) {
-            return redirect()->route('usertool')->with('error', 'User not found');
+        $user = User::findOrFail($id);
+
+        $user->userInfo()->update([
+            'user_firstname' => $request->input('firstname'),
+            'user_lastname' => $request->input('lastname'),
+        ]);
+    
+        $user->update([
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+        ]);
+
+        if ($request->has('enable_password_change')) {
+            $request->validate([
+                'user_password' => 'required|min:8|confirmed',
+            ]);
+    
+            $user->update([
+                'password' => bcrypt($request->input('user_password')),
+            ]);
         }
-        $user->roles()->sync($request->roles);
-        return redirect()->route('usertool')->with('success', 'Roles updated successfully');
+        
+        $user->roles()->sync($request->input('user-role', []));
+
+        return redirect()->route('usertool')->with('success', 'User roles and password updated successfully');
     }
 }
